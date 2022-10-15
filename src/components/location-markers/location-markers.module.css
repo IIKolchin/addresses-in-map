@@ -1,0 +1,15 @@
+.heading {
+  text-align: center;
+  font-family: 'Jost';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 29px;
+}
+
+.text {
+  text-overflow: ellipsis;
+  font-family: 'Jost';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+}

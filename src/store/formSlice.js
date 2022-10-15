@@ -15,12 +15,19 @@ const formSlice = createSlice({
     setForm(state, { payload }) {
       state.form = { ...state.form, ...payload };
     },
+    // getForm(state, { payload }) {
+    //     state.forms = { ...state.form, ...payload };
+    //   },
     addForm(state, { payload }) {
       state.forms.push(payload);
+    //   localStorage.setItem('form', JSON.stringify([...state.forms, payload]))
     },
+    setArrForm(state, { payload }) {
+        state.forms = payload
+      },
   },
 });
 
-export const { setForm, addForm } = formSlice.actions;
+export const { setForm, addForm, setArrForm } = formSlice.actions;
 
 export default formSlice.reducer;

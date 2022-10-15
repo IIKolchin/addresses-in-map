@@ -22,35 +22,40 @@ export default function Sidebar({ address }) {
     dispatch(setForm({ [e.target.name]: e.target.value }));
   };
 
+  useEffect(() => {}, [dispatch]);
+
   const addMarker = (e) => {
     e.preventDefault();
 
     if (
-      (markers.length - 1 === forms.length && form.title !== '') &&
+      markers.length - 1 === forms.length &&
+      form.title !== '' &&
       form.description !== ''
     ) {
       dispatch(addForm(form));
+
       dispatch(openSidebar(false));
-      dispatch(showButtonAdd(true))
+      dispatch(showButtonAdd(true));
       dispatch(setForm({ title: '', description: '' }));
-    
+      //   localStorage.setItem('form', JSON.stringify(forms))
     }
   };
 
   console.log(markers);
+  localStorage.setItem('markers', JSON.stringify(markers));
   console.log(forms);
+  //   localStorage.setItem('form', JSON.stringify(forms))
 
   return (
     <div className={styles.sidebar}>
-      <h2>Выберете адрес на карте</h2>
-      <p>Адрес: {address ? address : 'Не выбран'}</p>
+      <h2 className={styles.heading}>Выберете адрес на карте</h2>
+      <p className={styles.address}>Адрес: {address ? address : 'Не выбран'}</p>
 
       <select
-        defaultValue='none'
         name='title'
         onChange={onChange}
         value={form.title}
-        className={styles.input}
+        className={styles.select}
       >
         <option disabled={true} value=''>
           Заголовок
@@ -62,11 +67,10 @@ export default function Sidebar({ address }) {
       </select>
 
       <select
-        defaultValue='none'
         name='description'
         onChange={onChange}
         value={form.description}
-        className={styles.input}
+        className={styles.select}
       >
         <option disabled={true} value=''>
           Описание
@@ -76,8 +80,11 @@ export default function Sidebar({ address }) {
             return <option key={i}>{item.name}</option>;
           })}
       </select>
-
-      <button onClick={addMarker}>Добавить</button>
+      <div className={styles.wrapper}>
+        <button className={styles.button} onClick={addMarker}>
+          Добавить
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-// import styles from './map-component.module.css';
+import styles from './location-markers.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../Map.css';
 import { useMapEvents, useMap } from 'react-leaflet/hooks';
@@ -26,11 +26,13 @@ import { openSidebar } from '../../store/stateSidebarSlice';
     const markers = useSelector((state) => state.marker.markers);
     const dispatch = useDispatch();
 
-
+console.log(markers)
+console.log(forms)
     const map = useMapEvents({
       click(e) {
-        if(showSidebar) {
+        if(showSidebar && markers.length - forms.length < 1) {
             dispatch(setMarker(e.latlng));
+          // localStorage.setItem('markers', JSON.stringify(markers))
         }
   
       },
@@ -45,8 +47,8 @@ import { openSidebar } from '../../store/stateSidebarSlice';
             icon={
               new Icon({
                 iconUrl: markerIconPng,
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
+                iconSize: [30, 45],
+                iconAnchor: [15, 5],
               })
             }
             key={i}
@@ -54,8 +56,8 @@ import { openSidebar } from '../../store/stateSidebarSlice';
           >
     
                 <Popup >
-                  <p>{forms[i]?.title}</p>
-                  <p>{forms[i]?.description}</p>
+                  <h3 className={styles.heading}>{forms[i]?.title}</h3>
+                  <p className={styles.text}>{forms[i]?.description}</p>
                 </Popup>
       
           </Marker>
