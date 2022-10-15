@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import styles from './app.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import MapComponent from './components/map-component/map-component';
+import Portal from './components/portal/portal';
+import Sidebar from './components/sidebar/sidebar';
+import { fetchData } from './store/dataSlice';
 
 function App() {
+
+  // const data = useSelector((state) => state.data.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData())
+    },[dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <MapComponent />
     </div>
   );
 }

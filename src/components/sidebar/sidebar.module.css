@@ -1,0 +1,17 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 100vh;
+    z-index: 10000;
+    background-color: white;
+ 
+   
+}
+
+.input {
+    width: 400px;
+    height: 60px;
+    
+}

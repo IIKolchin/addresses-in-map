@@ -1,0 +1,12 @@
+.app {
+    position: relative;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 100vh;
+    z-index: 12;
+}
