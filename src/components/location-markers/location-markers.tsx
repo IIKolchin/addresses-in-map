@@ -6,8 +6,8 @@ import '../../Map.css';
 // @ts-ignore
 import { useMapEvents } from 'react-leaflet/hooks';
 import { Icon } from 'leaflet';
-// @ts-ignore
-import markerIconPng from 'leaflet/dist/images/marker-icon.png';
+import blue from '../../images/blue.svg';
+import red from '../../images/red.svg';
 import { setMarker } from '../../store/markerSlice';
 import { IMarker } from '../../services/types';
 
@@ -28,25 +28,53 @@ export default function LocationMarkers() {
 
   return (
     <React.Fragment>
-      {markers.map((position, i) => (
-        <Marker
-          ref={marker}
-          icon={
-            new Icon({
-              iconUrl: markerIconPng,
-              iconSize: [30, 45],
-              iconAnchor: [15, 5],
-            })
-          }
-          key={i}
-          position={position}
-        >
-          <Popup>
-            <h3 className={styles.heading}>{forms[i]?.title}</h3>
-            <p className={styles.text}>{forms[i]?.description}</p>
-          </Popup>
-        </Marker>
-      ))}
+      {markers.map((position, i) => {
+        if (
+          showSidebar &&
+          markers.length - forms.length === 1 &&
+          i === markers.length - 1
+        ) {
+          return (
+            <Marker
+              ref={marker}
+              icon={
+                new Icon({
+                  iconUrl: red,
+                  iconSize: [50, 65],
+                  iconAnchor: [15, 5],
+                })
+              }
+              key={i}
+              position={position}
+            >
+              <Popup>
+                <h3 className={styles.heading}>{forms[i]?.title}</h3>
+                <p className={styles.text}>{forms[i]?.description}</p>
+              </Popup>
+            </Marker>
+          );
+        } else {
+          return (
+            <Marker
+              ref={marker}
+              icon={
+                new Icon({
+                  iconUrl: blue,
+                  iconSize: [50, 65],
+                  iconAnchor: [15, 5],
+                })
+              }
+              key={i}
+              position={position}
+            >
+              <Popup>
+                <h3 className={styles.heading}>{forms[i]?.title}</h3>
+                <p className={styles.text}>{forms[i]?.description}</p>
+              </Popup>
+            </Marker>
+          );
+        }
+      })}
     </React.Fragment>
   );
 }
