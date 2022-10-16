@@ -1,10 +1,10 @@
-// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
+import { IMarker } from '../services/types';
 
 const markerSlice = createSlice({
   name: 'marker',
   initialState: {
-    markers: [],
+    markers: [] as IMarker[],
     marker: null,
   },
   reducers: {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
 import { IForm } from '../services/types';
 

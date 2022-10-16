@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import styles from './location-markers.module.css';
@@ -10,6 +9,7 @@ import { Icon } from 'leaflet';
 // @ts-ignore
 import markerIconPng from 'leaflet/dist/images/marker-icon.png';
 import { setMarker } from '../../store/markerSlice';
+import { IMarker } from '../../services/types';
 
 
 export default function LocationMarkers() {
@@ -20,7 +20,7 @@ export default function LocationMarkers() {
   const dispatch = useAppDispatch();
 
   const map = useMapEvents({
-    click(e: { latlng: any; }) {
+    click(e: { latlng: IMarker; }) {
       if (showSidebar && markers.length - forms.length < 1) {
         dispatch(setMarker(e.latlng));
       }

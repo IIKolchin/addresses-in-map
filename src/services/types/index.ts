@@ -12,12 +12,16 @@ export interface IName {
   name: string;
 }
 
-export interface ITitle {
-    titles: IName[];
-  } 
-  export interface IDescription {
-    description: IName[];
-  } 
+export interface IMarker {
+  lat: number;
+  lng: number;
+}
+
+export interface IAddress {
+  city: string;
+  road: string;
+  house_number: string;
+}
 
 export interface Idata {
   reference: {
