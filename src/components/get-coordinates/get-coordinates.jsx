@@ -26,7 +26,7 @@ export const GetCoordinates = () => {
     //     map.options.crs.scale(map.getZoom()),
     //     (results) => {
     //       const r = results[0]?.properties.address;
-пше фвв
+
     //       const address =
     //         r.house_number === undefined
     //           ? `${r.city}, ${r.road}`
