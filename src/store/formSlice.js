@@ -5,7 +5,7 @@ const initialState = {
     title: '',
     description: '',
   },
-  forms: []
+  forms: [],
 };
 
 const formSlice = createSlice({
@@ -15,16 +15,12 @@ const formSlice = createSlice({
     setForm(state, { payload }) {
       state.form = { ...state.form, ...payload };
     },
-    // getForm(state, { payload }) {
-    //     state.forms = { ...state.form, ...payload };
-    //   },
     addForm(state, { payload }) {
       state.forms.push(payload);
-    //   localStorage.setItem('form', JSON.stringify([...state.forms, payload]))
     },
     setArrForm(state, { payload }) {
-        state.forms = payload
-      },
+      state.forms = payload;
+    },
   },
 });
 

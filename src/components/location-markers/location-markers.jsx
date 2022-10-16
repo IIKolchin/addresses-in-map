@@ -1,67 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useRef } from 'react';
+import { Marker, Popup } from 'react-leaflet';
 import styles from './location-markers.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../Map.css';
-import { useMapEvents, useMap } from 'react-leaflet/hooks';
-import L from 'leaflet';
+import { useMapEvents } from 'react-leaflet/hooks';
 import { Icon } from 'leaflet';
 import markerIconPng from 'leaflet/dist/images/marker-icon.png';
-import Portal from '../portal/portal';
-import Sidebar from '../sidebar/sidebar';
-import LCG from 'leaflet-control-geocoder';
-import { setPosition } from '../../store/addressSlice';
-import { getMarker, setMarker } from '../../store/markerSlice';
-import { openSidebar } from '../../store/stateSidebarSlice';
+import { setMarker } from '../../store/markerSlice';
 
+export default function LocationMarkers() {
+  const showSidebar = useSelector((state) => state.sidebar.showSidebar);
+  const marker = useRef();
+  const forms = useSelector((state) => state.form.forms);
+  const markers = useSelector((state) => state.marker.markers);
+  const dispatch = useDispatch();
 
+  const map = useMapEvents({
+    click(e) {
+      if (showSidebar && markers.length - forms.length < 1) {
+        dispatch(setMarker(e.latlng));
+      }
+    },
+  });
 
- export default function LocationMarkers() {
-    const address = useSelector((state) => state.address.address);
-    const title = useSelector((state) => state.form.form.title);
-    const description = useSelector((state) => state.form.form.description);
-    const showSidebar = useSelector((state) => state.sidebar.showSidebar);
-    const marker = useRef();
-    const forms = useSelector((state) => state.form.forms);
-    const markers = useSelector((state) => state.marker.markers);
-    const dispatch = useDispatch();
-
-console.log(markers)
-console.log(forms)
-    const map = useMapEvents({
-      click(e) {
-        if(showSidebar && markers.length - forms.length < 1) {
-            dispatch(setMarker(e.latlng));
-          // localStorage.setItem('markers', JSON.stringify(markers))
-        }
-  
-      },
-    });
-    // console.log(markers);
-
-    return (
-      <React.Fragment>
-        {markers.map((position, i) => (
-          <Marker
-            ref={marker}
-            icon={
-              new Icon({
-                iconUrl: markerIconPng,
-                iconSize: [30, 45],
-                iconAnchor: [15, 5],
-              })
-            }
-            key={i}
-            position={position}
-          >
-    
-                <Popup >
-                  <h3 className={styles.heading}>{forms[i]?.title}</h3>
-                  <p className={styles.text}>{forms[i]?.description}</p>
-                </Popup>
-      
-          </Marker>
-        ))}
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      {markers.map((position, i) => (
+        <Marker
+          ref={marker}
+          icon={
+            new Icon({
+              iconUrl: markerIconPng,
+              iconSize: [30, 45],
+              iconAnchor: [15, 5],
+            })
+          }
+          key={i}
+          position={position}
+        >
+          <Popup>
+            <h3 className={styles.heading}>{forms[i]?.title}</h3>
+            <p className={styles.text}>{forms[i]?.description}</p>
+          </Popup>
+        </Marker>
+      ))}
+    </React.Fragment>
+  );
+}

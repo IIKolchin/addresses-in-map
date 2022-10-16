@@ -9,14 +9,13 @@ const markerSlice = createSlice({
   reducers: {
     setMarker(state, { payload }) {
       state.markers.push(payload);
-    //   localStorage.setItem('markers', [...state.markers, payload])
     },
     getMarker(state, { payload }) {
       state.marker = payload;
     },
     setArrMarker(state, { payload }) {
-        state.markers = payload;
-      },
+      state.markers = payload;
+    },
   },
 });
 

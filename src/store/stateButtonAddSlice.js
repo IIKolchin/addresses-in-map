@@ -9,7 +9,6 @@ const stateButtonAddSlice = createSlice({
     showButtonAdd(state, { payload }) {
       state.showButton = payload;
     },
-
   },
 });
 

@@ -9,9 +9,6 @@ const stateSidebarSlice = createSlice({
     openSidebar(state, { payload }) {
       state.showSidebar = payload;
     },
-  //   closeSidebar(state, { payload }) {
-  //     state.showSidebar = payload;
-  //   },
   },
 });
 

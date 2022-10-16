@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import './index.css';
 import "@fontsource/jost";
-import App from './App';
+import App from './components/app/App';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
 

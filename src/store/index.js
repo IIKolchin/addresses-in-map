@@ -13,9 +13,10 @@ export default configureStore({
     data: dataSlice,
     form: formSlice,
     sidebar: stateSidebarSlice,
-    addButton: stateButtonAddSlice
+    addButton: stateButtonAddSlice,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
