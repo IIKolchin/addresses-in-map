@@ -6,7 +6,7 @@ import { useMap } from 'react-leaflet/hooks';
 import L from 'leaflet';
 import { setPosition } from '../../store/addressSlice';
 import { IAddress, IMarker } from '../../services/types';
-import {Geocoder, geocoders} from 'leaflet-control-geocoder';
+import { Geocoder, geocoders } from 'leaflet-control-geocoder';
 
 export const GetCoordinates = () => {
   // @ts-ignore
@@ -17,7 +17,7 @@ export const GetCoordinates = () => {
 
   new Geocoder({
     geocoder: new geocoders.Nominatim(),
-  })
+  });
 
   useEffect(() => {
     if (!map) return;
@@ -28,19 +28,21 @@ export const GetCoordinates = () => {
       },
     });
 
-    map.on('click', (e: { latlng: IMarker; }) => {
+    map.on('click', (e: { latlng: IMarker }) => {
       geocoder?.reverse(
         e.latlng,
         map.options.crs.scale(map.getZoom()),
-        (results: { properties: { address: IAddress; }; }[]) => {
+        (results: { properties: { address: IAddress } }[]) => {
           const r = results[0]?.properties.address;
-
+          const city = r.city;
+          const street = r.road;
+          const house = r.house_number;
           const address =
-            r.house_number === undefined
-              ? `${r.city}, ${r.road}`
-              : r.road === undefined
-              ? `${r.city}`
-              : `${r.city}, ${r.road}, ${r.house_number}`;
+            city && street && house
+              ? `${city}, ${street}, ${house}`
+              : city && street
+              ? `${city}, ${street}`
+              : `${city}`;
           if (showSidebar) {
             dispatch(setPosition(address));
           }
