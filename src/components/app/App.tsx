@@ -1,15 +1,15 @@
+
 import React, { useEffect } from 'react';
-import styles from './app.module.css';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/index';
 import MapComponent from '../map-component/map-component';
 import { fetchData } from '../../store/dataSlice';
 import { setArrMarker } from '../../store/markerSlice';
 import { setArrForm } from '../../store/formSlice';
 
 function App() {
-  const dispatch = useDispatch();
-  const dataMarker = JSON.parse(localStorage.getItem('markers'));
-  const dataForm = JSON.parse(localStorage.getItem('form'));
+  const dispatch = useAppDispatch();
+  const dataMarker = JSON.parse(localStorage.getItem('markers') as string);
+  const dataForm = JSON.parse(localStorage.getItem('form') as string);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -20,7 +20,7 @@ function App() {
   }, [dispatch, dataMarker, dataForm]);
 
   return (
-    <div className={styles.app}>
+    <div>
       <MapComponent />
     </div>
   );

@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Idata } from '../services/types';
 import { URL } from '../utils/constants';
 
 export const initialState = {
   loading: false,
   hasErrors: false,
-  data: [],
+  data: [] as unknown as | Idata,
 };
 
 const dataSlice = createSlice({
@@ -31,7 +32,7 @@ export const { getData, getDataSuccess, getDataFailure } = dataSlice.actions;
 export default dataSlice.reducer;
 
 export function fetchData() {
-  return async (dispatch) => {
+  return async (dispatch: (arg0: { payload: any; type: string; }) => void) => {
     dispatch(getData());
 
     try {

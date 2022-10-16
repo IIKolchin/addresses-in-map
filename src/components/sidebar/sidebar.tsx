@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import styles from './sidebar.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useSelector } from '../../store/index';
 import { addForm, setForm } from '../../store/formSlice';
 import { openSidebar } from '../../store/stateSidebarSlice';
 import { showButtonAdd } from '../../store/stateButtonAddSlice';
 import { removePosition } from '../../store/addressSlice';
+import React from 'react';
 
 export default function Sidebar() {
   const data = useSelector((state) => state.data.data);
@@ -12,15 +13,15 @@ export default function Sidebar() {
   const form = useSelector((state) => state.form.form);
   const forms = useSelector((state) => state.form.forms);
   const markers = useSelector((state) => state.marker.markers);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setForm({ [e.target.name]: e.target.value }));
   };
 
   useEffect(() => {}, [dispatch]);
 
-  const addMarker = (e) => {
+  const addMarker = (e: React.UIEvent<HTMLElement>) => {
     e.preventDefault();
 
     if (

@@ -1,22 +1,26 @@
+
 import React, { useRef } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import styles from './location-markers.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useSelector } from '../../store/index';
 import '../../Map.css';
+// @ts-ignore
 import { useMapEvents } from 'react-leaflet/hooks';
 import { Icon } from 'leaflet';
+// @ts-ignore
 import markerIconPng from 'leaflet/dist/images/marker-icon.png';
 import { setMarker } from '../../store/markerSlice';
 
+
 export default function LocationMarkers() {
   const showSidebar = useSelector((state) => state.sidebar.showSidebar);
-  const marker = useRef();
+  const marker = useRef(null);
   const forms = useSelector((state) => state.form.forms);
   const markers = useSelector((state) => state.marker.markers);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const map = useMapEvents({
-    click(e) {
+    click(e: { latlng: any; }) {
       if (showSidebar && markers.length - forms.length < 1) {
         dispatch(setMarker(e.latlng));
       }
@@ -39,7 +43,7 @@ export default function LocationMarkers() {
           position={position}
         >
           <Popup>
-            <h3 className={styles.heading}>{forms[i]?.title}</h3>
+            <h3 className={styles.heading}>{forms[i]?.title }</h3>
             <p className={styles.text}>{forms[i]?.description}</p>
           </Popup>
         </Marker>

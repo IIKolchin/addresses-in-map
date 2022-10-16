@@ -1,4 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import {
+  TypedUseSelectorHook,
+  useDispatch as dispatchHook,
+  useSelector as selectorHook,
+} from "react-redux";
 import addressSlice from './addressSlice';
 import dataSlice from './dataSlice';
 import formSlice from './formSlice';
@@ -6,7 +12,7 @@ import markerSlice from './markerSlice';
 import stateButtonAddSlice from './stateButtonAddSlice';
 import stateSidebarSlice from './stateSidebarSlice';
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     address: addressSlice,
     marker: markerSlice,
@@ -20,3 +26,13 @@ export default configureStore({
       serializableCheck: false,
     }),
 });
+
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch 
+
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+
+export type RootState = ReturnType<typeof store.getState>
+
+export default store

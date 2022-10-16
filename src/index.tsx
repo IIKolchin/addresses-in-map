@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import './index.css';
 import "@fontsource/jost";
 import App from './components/app/App';
-import store from './store';
+import store from './store/index';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as Element);
 root.render(
   <React.StrictMode>
       <Provider store={store}>

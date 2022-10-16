@@ -1,14 +1,17 @@
+
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useSelector } from '../../store/index';
 import '../../Map.css';
+// @ts-ignore
 import { useMap } from 'react-leaflet/hooks';
 import L from 'leaflet';
 import { setPosition } from '../../store/addressSlice';
 
 export const GetCoordinates = () => {
+  // @ts-ignore
   const geocoder = L.Control.Geocoder?.nominatim();
   const showSidebar = useSelector((state) => state.sidebar.showSidebar);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const map = useMap();
 
   useEffect(() => {

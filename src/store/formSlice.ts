@@ -1,11 +1,15 @@
+// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
+import { IForm } from '../services/types';
+
+
 
 const initialState = {
   form: {
     title: '',
     description: '',
   },
-  forms: [],
+  forms: [] as IForm[],
 };
 
 const formSlice = createSlice({

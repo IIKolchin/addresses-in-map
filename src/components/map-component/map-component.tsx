@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import styles from './map-component.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useSelector } from '../../store/index';
 import '../../Map.css';
 import Sidebar from '../sidebar/sidebar';
 import { getMarker } from '../../store/markerSlice';
@@ -18,7 +18,7 @@ function MapComponent() {
   const forms = useSelector((state) => state.form.forms);
   const buttonAdd = useSelector((state) => state.addButton.showButton);
   const markers = useSelector((state) => state.marker.markers);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getMarker(marker.current));
