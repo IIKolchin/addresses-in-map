@@ -7,7 +7,11 @@
 }
 
 .text {
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
   font-family: 'Jost';
   font-weight: 400;
   font-size: 20px;

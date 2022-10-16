@@ -11,7 +11,6 @@ import markerIconPng from 'leaflet/dist/images/marker-icon.png';
 import { setMarker } from '../../store/markerSlice';
 import { IMarker } from '../../services/types';
 
-
 export default function LocationMarkers() {
   const showSidebar = useSelector((state) => state.sidebar.showSidebar);
   const marker = useRef(null);
@@ -20,7 +19,7 @@ export default function LocationMarkers() {
   const dispatch = useAppDispatch();
 
   const map = useMapEvents({
-    click(e: { latlng: IMarker; }) {
+    click(e: { latlng: IMarker }) {
       if (showSidebar && markers.length - forms.length < 1) {
         dispatch(setMarker(e.latlng));
       }
@@ -43,7 +42,7 @@ export default function LocationMarkers() {
           position={position}
         >
           <Popup>
-            <h3 className={styles.heading}>{forms[i]?.title }</h3>
+            <h3 className={styles.heading}>{forms[i]?.title}</h3>
             <p className={styles.text}>{forms[i]?.description}</p>
           </Popup>
         </Marker>
