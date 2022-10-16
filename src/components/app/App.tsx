@@ -20,9 +20,7 @@ function App() {
   }, [dispatch, dataMarker, dataForm]);
 
   return (
-    <div>
-      <MapComponent />
-    </div>
+      <MapComponent />  
   );
 }
 

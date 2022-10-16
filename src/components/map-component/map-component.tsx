@@ -10,6 +10,7 @@ import LocationMarkers from '../location-markers/location-markers';
 import { GetCoordinates } from '../get-coordinates/get-coordinates';
 import { showButtonAdd } from '../../store/stateButtonAddSlice';
 import { Loader } from '../loader/loader';
+import NewLocationMarkers from '../new-location-marker/new-location-marker';
 
 function MapComponent() {
   const [loading, setLoading] = useState(true);
@@ -31,10 +32,10 @@ function MapComponent() {
   };
 
   if (loading) {
-    return <Loader />;
+    return <Loader/>;
   }
   localStorage.setItem('form', JSON.stringify(forms));
-  
+
   return (
     <>
       {showSidebar && <Sidebar />}
@@ -51,7 +52,8 @@ function MapComponent() {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
         <GetCoordinates />
-        <LocationMarkers />
+        {!showSidebar && <LocationMarkers />}
+        {showSidebar && <NewLocationMarkers />}
       </MapContainer>
 
       {buttonAdd && (
